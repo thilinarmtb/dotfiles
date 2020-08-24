@@ -4,6 +4,12 @@ set shiftwidth=2
 set smartindent  
 set ignorecase
 set smartcase
+set tags=tags
+set encoding=utf-8
+" set spell spelllang=en_us
+
+" Hybrid numbers
+set number relativenumber
 
 autocmd BufEnter *.cl :setlocal filetype=c
 autocmd BufEnter *.okl :setlocal filetype=c
