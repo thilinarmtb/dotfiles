@@ -34,30 +34,52 @@ Plugin 'tpope/vim-fugitive'
 " Plugin 'L9'
 " Git plugin not hosted on GitHub
 Plugin 'git://git.wincent.com/command-t.git'
-" git repos on your local machine (i.e. when working on your own plugin)
-Plugin 'file:///home/gmarik/path/to/plugin'
 " The sparkup vim script is in a subdirectory of this repo called vim.
 " Pass the path to set the runtimepath properly.
 Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 " Install L9 and avoid a Naming conflict if you've already installed a
 " different version somewhere else.
 " Plugin 'ascenator/L9', {'name': 'newL9'}
-
-" Calendar plugin
 Plugin 'itchyny/calendar.vim'
-
+Plugin 'Valloric/YouCompleteMe'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
-
 filetype plugin indent on    " required
 " To ignore plugin indent changes, instead use:
 "filetype plugin on
 "
 " Brief help
 " :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginInstall    - installs plugins; append `!` to update or just
+" :PluginUpdate
 " :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+" :PluginClean      - confirms removal of unused plugins; append `!` to
 "
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
+
+function! ClangCheckImpl(cmd)
+  if &autowrite | wall | endif
+  echo "Running " . a:cmd . " ..."
+  let l:output = system(a:cmd)
+  cexpr l:output
+  cwindow
+  let w:quickfix_title = a:cmd
+  if v:shell_error != 0
+    cc
+  endif
+  let g:clang_check_last_cmd = a:cmd
+endfunction
+
+function! ClangCheck()
+  let l:filename = expand('%')
+  if l:filename =~ '\.\(cpp\|cxx\|cc\|c\)$'
+    call ClangCheckImpl("clang-check " . l:filename)
+  elseif exists("g:clang_check_last_cmd")
+    call ClangCheckImpl(g:clang_check_last_cmd)
+  else
+    echo "Can't detect file's compilation arguments and no previous clang-check invocation!"
+  endif
+endfunction
+
+nmap <silent> <F5> :call ClangCheck()<CR><CR>
