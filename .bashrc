@@ -31,6 +31,8 @@ function gd() {
   rm t.diff 2>/dev/null
 }
 export -f gd
+alias gdc='git diff --cached'
+alias gd1='git diff HEAD~1'
 
 alias gf='git fetch'
 
