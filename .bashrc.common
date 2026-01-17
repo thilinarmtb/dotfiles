@@ -74,5 +74,3 @@ alias tks='tmux kill-session -t'
 alias tls='tmux ls'
 alias tns='tmux new -s'
 alias trs='tmux rename-session -t'
-
-alias qmy="qstat -u thilina"
