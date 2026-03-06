@@ -33,7 +33,7 @@ function gd() {
 export -f gd
 alias gd1='git diff HEAD~1'
 alias gdc='git diff --cached'
-alias gdn='git diff --name-only'
+alias gdno='git diff --name-only'
 
 alias gf='git fetch'
 
@@ -47,8 +47,10 @@ alias gpf='git push -f'
 alias gpu='git push -u'
 
 alias gpl='git pull'
+alias gplom='git pull origin main'
 
 alias gr='git rebase'
+alias grm='git rebase main'
 
 alias grh='git reset --hard HEAD'
 
