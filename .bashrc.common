@@ -18,6 +18,7 @@ alias gbm='git branch -m'
 
 alias gc='git commit'
 alias gca='git commit --amend'
+
 alias gco='git checkout'
 alias gcom='git checkout main'
 alias gcb='git checkout -b'
