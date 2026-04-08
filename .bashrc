@@ -31,7 +31,9 @@ function gd() {
   fi
   rm t.diff 2>/dev/null
 }
-export -f gd
+if [[ $0 == *bash ]]; then
+  export -f gd
+fi
 alias gd1='git diff HEAD~1'
 alias gdc='git diff --cached'
 alias gdno='git diff --name-only'
