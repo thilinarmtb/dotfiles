@@ -1,3 +1,7 @@
+# Some environment variables
+export PS1="\h:\w\\$ "
+export PROMPT_DIRTRIM=3
+
 # enable vim bindings
 set -o vi
 
@@ -16,15 +20,15 @@ alias gba='git branch -a'
 alias gbd='git branch -D'
 alias gbm='git branch -m'
 
-alias gc='git commit'
-alias gca='git commit --amend'
+alias gc='git commit -s'
+alias gca='git commit -s --amend'
 
 alias gco='git checkout'
 alias gcom='git checkout main'
 alias gcb='git checkout -b'
 alias gcx='git clean -dfx'
 
-function gd() {
+gd() {
   git diff > t.diff
   if [ -s t.diff ]; then
     vi t.diff
@@ -66,7 +70,12 @@ alias grs='git restore --staged'
 
 alias gst='git status'
 alias gsa='git stash apply'
-alias gsd='git stash drop'
+gsd() {
+  git stash drop "stash@{${1:-0}}"
+}
+if [[ $0 == *bash ]]; then
+  export -f gsd
+fi
 alias gsh='git stash'
 alias gsl='git stash list'
 alias gss='git stash show'
