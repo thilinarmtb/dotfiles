@@ -78,8 +78,7 @@ if [[ $0 == *bash ]]; then
 fi
 alias gsh='git stash'
 alias gsl='git stash list'
-alias gss='git stash show'
-alias gsp='git stash show -p'
+alias gss='git stash show -p'
 
 alias gr='grep -Irn'
 alias gri='grep -Iirn'
